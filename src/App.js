@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Chat from "./Chat";
 import Login from "./Login";
+import { useStateValue } from "./StateProvider";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div className="app">
       <Router>
@@ -23,7 +24,14 @@ function App() {
                   <Chat />
                 </Route>
                 <Route path="/">
-                  <h1>Welcoe</h1>
+                  <h1>Welcome to slack</h1>
+                  <ul>
+                    <li>You can create channels</li>
+                    <li>You can send messages to channels</li>
+                    <li>You can find username and profilepicture as per your gmail account</li>
+                    <li>Check out the general and youtube channels on bottom left</li>
+                    <li>Many more updates coming soon..</li>
+                  </ul>
                 </Route>
               </Switch>
             </div>
