@@ -4,8 +4,10 @@ import { auth, provider } from "./firebase";
 import "./Login.css";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
+import { useHistory } from "react-router-dom";
 function Login() {
   const [state, dispatch] = useStateValue();
+  const history = useHistory();
   const signIn = () => {
     auth
       .signInWithPopup(provider)
@@ -15,6 +17,7 @@ function Login() {
           type: actionTypes.SET_USER,
           user: result.user,
         });
+        history.push("/");
       })
       .catch((error) => {
         alert(error.message);
@@ -29,9 +32,9 @@ function Login() {
           alt="slack img"
         />
         <h1>Sign in to Slack Clone 🕴 </h1>
-        <p>karthik'sclone.slack.com</p>
         <Button onClick={signIn}>Sign In with Google</Button>
       </div>
+      <small className="login__footer">© Karun Karthik 2020 💻</small>
     </div>
   );
 }

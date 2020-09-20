@@ -5,8 +5,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccessTimeIcon from "@material-ui/icons/AccessTimeOutlined";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutlineOutlined";
 import { useStateValue } from "./StateProvider";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { auth } from "./firebase";
 function Header() {
   const [{ user }] = useStateValue();
+  const logOut = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
   return (
     <div className="header">
       <div className="header__left">
@@ -23,9 +30,8 @@ function Header() {
         <input placeholder="Search Stack Clone" />
       </div>
 
-      <div className="header__right">
-        {/**Help Icon */}
-        <HelpOutlineIcon />
+      <div onClick={logOut} className="header__right">
+        <ExitToAppIcon />
       </div>
     </div>
   );
